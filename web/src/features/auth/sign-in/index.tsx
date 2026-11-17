@@ -31,12 +31,15 @@ export function SignIn() {
   const { status } = useStatus()
 
   return (
-    <AuthLayout>
-      <div className='w-full space-y-8'>
+    <AuthLayout variant='portal'>
+      <div className='sd-sign-in w-full space-y-8'>
         <div className='space-y-2'>
           <h2 className='text-center text-2xl font-semibold tracking-tight sm:text-left'>
             {t('Sign in')}
           </h2>
+          <p className='sd-sign-in-description text-muted-foreground text-sm'>
+            {t('Sign in to manage your model service.')}
+          </p>
           {!status?.self_use_mode_enabled &&
             status?.register_enabled !== false && (
               <p className='text-muted-foreground text-left text-sm sm:text-base'>

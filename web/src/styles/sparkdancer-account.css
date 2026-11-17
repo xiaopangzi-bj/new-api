@@ -1,0 +1,377 @@
+/*
+Copyright (C) 2023-2026 QuantumNous
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+For commercial licensing, please contact support@quantumnous.com
+*/
+/* SparkDancer account pages; existing authentication components own all behavior. */
+.sd-auth-shell {
+  --sd-ink: #183641;
+  --sd-muted: #5a737e;
+  --sd-line: #d9e7eb;
+  --sd-accent: #087e91;
+  --primary: #087e91;
+  --primary-foreground: #fff;
+  --input: #cbdde3;
+  --ring: #087e91;
+  min-height: 100svh;
+  height: auto;
+  grid-template-columns: minmax(0, 1fr) minmax(460px, 0.9fr);
+  background: #eef7f8;
+  color: var(--sd-ink);
+}
+.sd-auth-shell .sd-auth-brand {
+  top: 36px;
+  left: 44px;
+  gap: 12px;
+}
+.sd-auth-shell .sd-auth-brand h1 {
+  font-size: 16px;
+  font-weight: 650;
+  letter-spacing: -0.3px;
+}
+.sd-auth-story {
+  padding: 140px 64px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 70px;
+}
+.sd-auth-story-content {
+  margin: auto 0;
+  max-width: 490px;
+}
+.sd-auth-mark {
+  width: 104px;
+  height: 104px;
+  object-fit: contain;
+  margin-bottom: 38px;
+}
+.sd-auth-story h2 {
+  font-size: clamp(32px, 3.6vw, 52px);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -1.8px;
+  text-wrap: balance;
+  margin-bottom: 24px;
+}
+.sd-auth-story-content p {
+  color: var(--sd-muted);
+  font-size: 16px;
+  line-height: 1.9;
+  max-width: 355px;
+}
+.sd-auth-signature {
+  font-weight: 650;
+  font-size: 14px;
+  letter-spacing: -0.2px;
+}
+.sd-auth-signature span {
+  display: inline-block;
+  color: var(--sd-muted);
+  font-weight: 400;
+  margin-left: 16px;
+  font-size: 12px;
+}
+.sd-auth-main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: 110px 48px 36px;
+  border-left: 1px solid var(--sd-line);
+}
+.sd-auth-shell .sd-auth-form {
+  max-width: 400px;
+  width: 100%;
+  padding: 0;
+  margin: auto;
+}
+.sd-auth-shell .sd-sign-in h2 {
+  font-size: 30px;
+  text-align: left;
+  line-height: 1.3;
+  font-weight: 650;
+  margin-bottom: 12px;
+  letter-spacing: -0.8px;
+}
+.sd-auth-shell .sd-sign-in-description {
+  color: var(--sd-muted);
+  line-height: 1.8;
+}
+.sd-auth-shell .sd-sign-in input {
+  min-height: 46px;
+  border-radius: 9px;
+  border-color: #cbdde3;
+  padding-left: 13px;
+  box-shadow: none;
+  background: transparent;
+}
+.sd-auth-shell .sd-sign-in input:focus-visible {
+  border-color: var(--sd-accent);
+  outline-color: var(--sd-accent);
+}
+.sd-auth-shell .sd-sign-in button[type='submit'] {
+  min-height: 46px;
+  border-radius: 9px;
+  background: #087e91;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: none;
+}
+.sd-auth-shell .sd-sign-in button[type='submit']:hover {
+  background: #066a7a;
+}
+.sd-auth-help {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--sd-muted);
+  font-size: 12px;
+  margin-top: 54px;
+}
+.sd-auth-help a:hover {
+  color: var(--sd-accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.sd-auth-shell a:focus-visible {
+  outline: 2px solid var(--sd-accent);
+  outline-offset: 4px;
+  border-radius: 3px;
+}
+.dark .sd-auth-shell {
+  --sd-ink: #edf7f9;
+  --sd-muted: #a9c4cc;
+  --sd-line: #29454f;
+  --sd-accent: #67d5e3;
+  background: #132d35;
+}
+.dark .sd-auth-main {
+  background: #112128;
+}
+.dark .sd-auth-shell .sd-sign-in input {
+  border-color: #37535e;
+}
+.sd-security-page {
+  --sd-section-line: #dce7eb;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding-bottom: 28px;
+}
+.dark .sd-security-page {
+  --sd-section-line: #2e424c;
+}
+.sd-security-intro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+.sd-security-intro p {
+  color: var(--muted-foreground);
+  font-size: 14px;
+  line-height: 1.8;
+  max-width: 660px;
+}
+.sd-security-intro a {
+  color: #087e91;
+  font-size: 13px;
+  white-space: nowrap;
+  text-underline-offset: 4px;
+}
+.dark .sd-security-intro a {
+  color: #67d5e3;
+}
+.sd-security-page h3 {
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -0.2px;
+}
+.sd-security-verification {
+  margin-bottom: 32px;
+  scroll-margin-top: 90px;
+}
+.sd-security-section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.sd-security-section-head p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--muted-foreground);
+}
+.sd-security-factors {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.sd-security-factors > [data-slot='card'] {
+  border: 1px solid var(--sd-section-line);
+  border-radius: 14px;
+  box-shadow: none;
+}
+.sd-security-factors > [data-slot='card']:first-child {
+  border-top: 3px solid #08a8c4;
+}
+.sd-security-factors [data-slot='card-header'] {
+  padding: 22px 24px 14px;
+}
+.sd-security-factors [data-slot='card-content'] {
+  padding: 0 24px 24px;
+}
+.sd-security-factors [data-slot='card-title'] {
+  font-size: 17px;
+}
+.sd-security-factors [data-slot='button'] {
+  min-height: 38px;
+}
+.sd-security-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(280px, 1fr);
+  align-items: start;
+  gap: 26px;
+}
+.sd-security-stack {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.sd-security-page .sd-security-section {
+  min-width: 0;
+  border-top: 1px solid var(--sd-section-line);
+  padding-top: 22px;
+}
+.sd-security-page .sd-security-section > h3 {
+  margin-bottom: 15px;
+}
+.sd-security-stack [data-slot='card'] {
+  border-radius: 12px;
+  box-shadow: none;
+}
+.sd-security-danger {
+  margin-top: 36px;
+}
+.sd-security-danger [data-slot='card'] {
+  box-shadow: none;
+}
+@media (min-width: 1500px) {
+  .sd-auth-story {
+    padding-left: 100px;
+  }
+  .sd-auth-main {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+}
+@media (max-width: 1000px) {
+  .sd-auth-story {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  .sd-auth-shell {
+    grid-template-columns: minmax(0, 0.85fr) minmax(400px, 1fr);
+  }
+  .sd-auth-main {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+  .sd-security-columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 740px) {
+  .sd-auth-shell {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+  }
+  .sd-auth-shell .sd-auth-brand {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin: 26px 24px 0;
+    width: fit-content;
+  }
+  .sd-auth-story {
+    padding: 36px 24px 0;
+    gap: 0;
+  }
+  .sd-auth-mark,
+  .sd-auth-signature {
+    display: none;
+  }
+  .sd-auth-story h2 {
+    font-size: 28px;
+    letter-spacing: -0.8px;
+    margin-bottom: 12px;
+  }
+  .sd-auth-story-content p {
+    font-size: 13px;
+    max-width: 100%;
+  }
+  .sd-auth-main {
+    flex: 1;
+    border: 0;
+    padding: 32px 24px 24px;
+    justify-content: flex-start;
+  }
+  .sd-auth-shell .sd-auth-form {
+    margin: 0 auto;
+  }
+  .sd-auth-shell .sd-sign-in h2 {
+    font-size: 24px;
+  }
+  .sd-auth-help {
+    margin: auto auto 0;
+    padding-top: 38px;
+  }
+  .dark .sd-auth-shell {
+    background: #112128;
+  }
+  .sd-security-intro {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .sd-security-factors {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+  .sd-security-factors [data-slot='card-header'] {
+    padding: 18px 18px 12px;
+  }
+  .sd-security-factors [data-slot='card-content'] {
+    padding: 0 18px 20px;
+  }
+  .sd-security-columns {
+    gap: 26px;
+  }
+}
+
+.sd-auth-shell .sd-sign-in input[aria-invalid='true'] {
+  border-color: var(--destructive);
+}

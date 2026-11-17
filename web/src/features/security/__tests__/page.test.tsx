@@ -156,53 +156,38 @@ async function renderPage(path = '/security') {
 }
 
 describe('security page migration', () => {
-  it('places account management on the left and verification and privacy on the right', async () => {
+  it('places second-factor controls first and destructive account actions last', async () => {
     await renderPage()
-    const login = await screen.findByRole('region', {
-      name: 'Login & Authentication',
-    })
-    expect(
-      screen
-        .getAllByRole('region')
-        .map((region) => within(region).getAllByRole('heading')[0].textContent)
-    ).toEqual([
-      'Login & Authentication',
-      'Sessions & Access',
-      'Account Actions',
-      'Privacy',
-    ])
-    expect(
-      within(login).getByRole('button', { name: 'Change Password' })
-    ).toBeVisible()
-    expect(within(login).getByText('Account Bindings')).toBeVisible()
-    const verification = screen.getByRole('complementary', {
+    const verification = await screen.findByRole('region', {
       name: 'Security verification',
     })
-    expect(await within(verification).findByText('Passkey Login')).toBeVisible()
     expect(
       await within(verification).findByText('Two-Factor Authentication')
     ).toBeVisible()
-    expect(
-      within(verification).getByRole('switch', { name: 'Record IP Address' })
-    ).toBeVisible()
-    expect(verification).toHaveClass('xl:sticky', 'xl:top-0')
-    expect(verification.parentElement).toHaveClass(
-      'grid',
-      'xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.46fr)]'
+    expect(await within(verification).findByText('Passkey Login')).toBeVisible()
+    const headings = within(verification).getAllByText(
+      /Two-Factor Authentication|Passkey Login/
     )
+    expect(headings[0]).toHaveTextContent('Two-Factor Authentication')
+    const regions = screen.getAllByRole('region')
+    expect(regions[0]).toBe(verification)
+    const account = screen.getByRole('region', { name: 'Account Actions' })
+    expect(regions.at(-1)).toBe(account)
+    expect(
+      within(account).getByRole('button', { name: 'Delete Account' })
+    ).toBeVisible()
+    const login = screen.getByRole('region', { name: 'Login & Authentication' })
+    expect(
+      within(login).getByRole('button', { name: 'Change Password' })
+    ).toBeVisible()
     const access = screen.getByRole('region', { name: 'Sessions & Access' })
     expect(within(access).getByText('Access tokens')).toBeVisible()
     expect(
       await within(access).findByText('No active login sessions')
     ).toBeVisible()
+    const privacy = screen.getByRole('complementary', { name: 'Privacy' })
     expect(
-      screen.getByRole('switch', { name: 'Record IP Address' })
-    ).toBeVisible()
-    expect(
-      within(screen.getByRole('region', { name: 'Account Actions' })).getByRole(
-        'button',
-        { name: 'Delete Account' }
-      )
+      within(privacy).getByRole('switch', { name: 'Record IP Address' })
     ).toBeVisible()
   })
 

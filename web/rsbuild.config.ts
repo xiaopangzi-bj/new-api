@@ -72,6 +72,9 @@ export default defineConfig(({ envMode }) => {
       proxy: devProxy,
     },
     output: {
+      // A release-specific prefix keeps existing browser sessions on their
+      // original assets while a new account UI is published or rolled back.
+      assetPrefix: process.env.VITE_FRONTEND_ASSET_PREFIX || '/',
       // Production optimizations
       minify: isProd,
       target: 'web',
